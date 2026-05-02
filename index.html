@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Portafolio personal con proyectos, habilidades y enlaces profesionales."
+    />
+    <title>Luis Leonel Romero | Cyberpunk Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <canvas id="cyber-stage" aria-hidden="true"></canvas>
+
+    <div class="noise" aria-hidden="true"></div>
+    <div class="scanline" aria-hidden="true"></div>
+
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="Volver al inicio">
+        <span class="brand-mark">root</span>
+        <span class="brand-text">/night-city</span>
+      </a>
+
+      <nav class="nav-links" aria-label="Navegacion principal">
+        <a href="#proyectos">Proyectos</a>
+        <a href="#stack">Stack</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Night city build / GitHub profile</p>
+          <h1>
+            Luis Leonel Romero
+            <span>Full Stack Developer</span>
+          </h1>
+          <p class="hero-text">
+            Me gusta crear sistemas web que resuelvan trabajo real: backend bien
+            estructurado, interfaces claras, automatizacion de procesos y
+            soluciones pensadas para que las personas las usen sin complicarse.
+          </p>
+
+          <div class="hero-actions" aria-label="Enlaces principales">
+            <a class="button primary" href="https://github.com/Leonel59" target="_blank" rel="noreferrer">
+              Ver GitHub
+            </a>
+            <a class="button ghost" href="https://gitlab.com/Leonel59" target="_blank" rel="noreferrer">
+              Ver GitLab
+            </a>
+          </div>
+        </div>
+
+        <div class="hero-side">
+          <figure class="profile-orbit">
+            <img src="assets/profile.jpg" alt="Foto de Luis Leonel Romero" />
+          </figure>
+
+          <aside class="terminal" aria-label="Resumen profesional estilo terminal">
+            <div class="terminal-bar">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+            <div class="terminal-body">
+              <div class="terminal-line">
+                <span class="prompt">$ perfil</span>
+                <p>Desarrollador full stack enfocado en sistemas web internos y soluciones administrativas.</p>
+              </div>
+              <div class="terminal-line">
+                <span class="prompt">$ lo_que_construyo</span>
+                <p class="success">APIs, paneles de gestion, reportes, flujos de solicitudes y herramientas de automatizacion.</p>
+              </div>
+              <div class="terminal-line">
+                <span class="prompt">$ forma_de_trabajo</span>
+                <p class="warning">Ordenado, practico y atento a que el software sea entendible para el usuario final.</p>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="metrics" aria-label="Resumen rapido">
+        <article>
+          <strong>+3</strong>
+          <span>capas dominadas: frontend, backend y datos</span>
+        </article>
+        <article>
+          <strong>API</strong>
+          <span>servicios REST, autenticacion y flujos internos</span>
+        </article>
+        <article>
+          <strong>UX</strong>
+          <span>interfaces pensadas para trabajo diario</span>
+        </article>
+      </section>
+
+      <section class="section" id="proyectos">
+        <div class="section-heading">
+          <p class="eyebrow">Selected operations</p>
+          <h2>Proyectos destacados</h2>
+        </div>
+
+        <div class="project-grid">
+          <a class="project-card featured" href="https://leonel59.github.io/sgi-unah-portafolio/" target="_blank" rel="noreferrer">
+            <img class="project-media project-emblem" src="assets/sgi-logo.png" alt="Logo del SGI" />
+            <div>
+              <p class="project-kicker">Sistema institucional</p>
+              <h3>SGI / Sistema de Gestion de la Investigacion</h3>
+              <p>
+                Plataforma para gestionar investigacion institucional:
+                solicitudes, usuarios, notificaciones, catalogos, reporteria y
+                procesos administrativos.
+              </p>
+            </div>
+            <ul class="tags" aria-label="Tecnologias">
+              <li>Angular</li>
+              <li>Node.js</li>
+              <li>SQL Server</li>
+              <li>REST API</li>
+            </ul>
+          </a>
+
+          <article class="project-card">
+            <img class="project-media project-emblem recarga-emblem" src="assets/recarga-veloz-white.png" alt="Logo del sistema Recarga Veloz SA" />
+            <div>
+              <p class="project-kicker">Gestion operativa</p>
+              <h3>Recarga Veloz SA</h3>
+              <p>
+                Sistema para gestion de equipos tecnologicos, reportes, manejo
+                de facturas y control de mantenimientos.
+              </p>
+            </div>
+            <ul class="tags">
+              <li>HTML</li>
+              <li>JavaScript</li>
+              <li>Angular</li>
+              <li>REST API</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="section split" id="stack">
+        <div class="section-heading">
+          <p class="eyebrow">Tech arsenal</p>
+          <h2>Stack y enfoque</h2>
+          <p>
+            Combino desarrollo full stack con criterio de producto: que funcione,
+            que sea mantenible y que se entienda cuando alguien mas lo abra.
+          </p>
+        </div>
+
+        <div class="stack-panel">
+          <div class="stack-row">
+            <span>Frontend</span>
+            <p>Angular, TypeScript, HTML, CSS, responsive UI</p>
+          </div>
+          <div class="stack-row">
+            <span>Backend</span>
+            <p>Node.js, Express, servicios REST, autenticacion</p>
+          </div>
+          <div class="stack-row">
+            <span>Datos</span>
+            <p>SQL Server, procedimientos almacenados, modelado de procesos</p>
+          </div>
+          <div class="stack-row">
+            <span>Modo</span>
+            <p>Depuracion, documentacion, automatizacion y entrega iterativa</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section contact" id="contacto">
+        <p class="eyebrow">Open channel</p>
+        <h2>Hablemos de tecnologia y proyectos</h2>
+        <p>
+          Si buscas un desarrollador full stack para construir, mejorar o
+          mantener sistemas web, puedes contactarme por correo o revisar mi
+          trabajo en GitHub y GitLab.
+        </p>
+        <div class="contact-links">
+          <a href="mailto:luisleonel596@gmail.com">luisleonel596@gmail.com</a>
+          <a href="https://github.com/Leonel59" target="_blank" rel="noreferrer">github.com/Leonel59</a>
+          <a href="https://gitlab.com/Leonel59" target="_blank" rel="noreferrer">gitlab.com/Leonel59</a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span>crafted in neon mode</span>
+      <span>2026 Luis Leonel Romero</span>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
