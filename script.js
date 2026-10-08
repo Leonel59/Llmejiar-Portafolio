@@ -1,164 +1,265 @@
-const canvas = document.querySelector("#cyber-stage");
-const ctx = canvas.getContext("2d");
+/**
+ * Script Interactivo - Portafolio Profesional de Luis Leonel Mejía Romero
+ * Ambient Particle Mesh + Interactive Navigation & Quick Copy
+ */
 
-let width = 0;
-let height = 0;
-let particles = [];
-let skyline = [];
-let pulse = 0;
+document.addEventListener('DOMContentLoaded', () => {
+  initAmbientCanvas();
+  initMobileNav();
+  initScrollSpy();
+  initEmailCopy();
+  initConsoleEasterEgg();
+});
 
-function resizeCanvas() {
-  const ratio = window.devicePixelRatio || 1;
-  width = window.innerWidth;
-  height = window.innerHeight;
-  canvas.width = Math.floor(width * ratio);
-  canvas.height = Math.floor(height * ratio);
-  canvas.style.width = `${width}px`;
-  canvas.style.height = `${height}px`;
-  ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+/* ==========================================================================
+   1. Ambient Canvas (Mesh Particles)
+   ========================================================================== */
+function initAmbientCanvas() {
+  const canvas = document.getElementById('ambient-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
 
-  particles = Array.from({ length: Math.floor(width / 16) }, () => ({
-    x: Math.random() * width,
-    y: Math.random() * height,
-    speed: 0.25 + Math.random() * 1.6,
-    size: 1 + Math.random() * 2.2,
-    hue: Math.random() > 0.5 ? "#00e5ff" : "#ff3df2",
-  }));
+  let width = 0;
+  let height = 0;
+  let particles = [];
+  let mouse = { x: null, y: null, radius: 120 };
+  let animationFrameId = null;
 
-  const buildingCount = Math.max(14, Math.floor(width / 90));
-  const buildingWidth = width / buildingCount;
-  skyline = Array.from({ length: buildingCount }, (_, index) => ({
-    x: index * buildingWidth,
-    w: buildingWidth * (0.62 + Math.random() * 0.34),
-    h: height * (0.15 + Math.random() * 0.26),
-    windows: Math.floor(4 + Math.random() * 9),
-  }));
-}
+  function resize() {
+    const dpr = window.devicePixelRatio || 1;
+    width = window.innerWidth;
+    height = window.innerHeight;
+    canvas.width = Math.floor(width * dpr);
+    canvas.height = Math.floor(height * dpr);
+    canvas.style.width = `${width}px`;
+    canvas.style.height = `${height}px`;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-function drawBackground() {
-  const gradient = ctx.createLinearGradient(0, 0, 0, height);
-  gradient.addColorStop(0, "#070313");
-  gradient.addColorStop(0.55, "#09051a");
-  gradient.addColorStop(1, "#17051f");
-  ctx.fillStyle = gradient;
-  ctx.fillRect(0, 0, width, height);
-}
-
-function drawSun() {
-  const radius = Math.min(width, height) * 0.18;
-  const x = width * 0.72;
-  const y = height * 0.28;
-  const glow = ctx.createRadialGradient(x, y, 0, x, y, radius);
-  glow.addColorStop(0, "rgba(255, 230, 109, 0.42)");
-  glow.addColorStop(0.35, "rgba(255, 45, 117, 0.22)");
-  glow.addColorStop(1, "rgba(255, 45, 117, 0)");
-  ctx.fillStyle = glow;
-  ctx.beginPath();
-  ctx.arc(x, y, radius, 0, Math.PI * 2);
-  ctx.fill();
-
-  ctx.strokeStyle = "rgba(255, 230, 109, 0.22)";
-  ctx.lineWidth = 1;
-  for (let line = -3; line < 5; line += 1) {
-    const yy = y + line * 18 + Math.sin(pulse * 0.025 + line) * 3;
-    ctx.beginPath();
-    ctx.moveTo(x - radius * 0.82, yy);
-    ctx.lineTo(x + radius * 0.82, yy);
-    ctx.stroke();
+    createParticles();
   }
-}
 
-function drawSkyline() {
-  const baseY = height * 0.56;
-  skyline.forEach((building, index) => {
-    const x = building.x;
-    const top = baseY - building.h;
+  function createParticles() {
+    const particleCount = Math.min(65, Math.floor((width * height) / 22000));
+    particles = [];
 
-    ctx.fillStyle = "rgba(5, 3, 15, 0.92)";
-    ctx.fillRect(x, top, building.w, building.h + 4);
+    for (let i = 0; i < particleCount; i++) {
+      particles.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        vx: (Math.random() - 0.5) * 0.45,
+        vy: (Math.random() - 0.5) * 0.45,
+        radius: Math.random() * 1.8 + 0.8,
+        baseAlpha: Math.random() * 0.35 + 0.15,
+        color: Math.random() > 0.4 ? 'rgba(0, 212, 255,' : 'rgba(56, 189, 248,',
+      });
+    }
+  }
 
-    ctx.strokeStyle = index % 2 === 0 ? "rgba(0, 229, 255, 0.42)" : "rgba(255, 61, 242, 0.36)";
-    ctx.lineWidth = 1;
-    ctx.strokeRect(x + 0.5, top + 0.5, building.w, building.h);
+  window.addEventListener('resize', debounce(resize, 200));
+  window.addEventListener('mousemove', (e) => {
+    mouse.x = e.clientX;
+    mouse.y = e.clientY;
+  });
 
-    const gap = building.w / 5;
-    for (let row = 0; row < building.windows; row += 1) {
-      for (let col = 1; col < 4; col += 1) {
-        if ((row + col + index + Math.floor(pulse / 60)) % 4 === 0) continue;
-        ctx.fillStyle = col % 2 === 0 ? "rgba(0, 229, 255, 0.65)" : "rgba(255, 230, 109, 0.55)";
-        ctx.fillRect(x + col * gap, top + 14 + row * 14, Math.max(3, gap * 0.28), 3);
+  window.addEventListener('mouseleave', () => {
+    mouse.x = null;
+    mouse.y = null;
+  });
+
+  function draw() {
+    ctx.clearRect(0, 0, width, height);
+
+    // Update & draw particles
+    for (let i = 0; i < particles.length; i++) {
+      const p = particles[i];
+
+      p.x += p.vx;
+      p.y += p.vy;
+
+      if (p.x < 0 || p.x > width) p.vx *= -1;
+      if (p.y < 0 || p.y > height) p.vy *= -1;
+
+      // Mouse gentle interaction
+      if (mouse.x !== null && mouse.y !== null) {
+        const dx = mouse.x - p.x;
+        const dy = mouse.y - p.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < mouse.radius) {
+          const force = (mouse.radius - dist) / mouse.radius;
+          p.x -= (dx / dist) * force * 1.5;
+          p.y -= (dy / dist) * force * 1.5;
+        }
+      }
+
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+      ctx.fillStyle = `${p.color} ${p.baseAlpha})`;
+      ctx.fill();
+
+      // Connect nearby particles
+      for (let j = i + 1; j < particles.length; j++) {
+        const p2 = particles[j];
+        const dist = Math.hypot(p.x - p2.x, p.y - p2.y);
+        const maxDist = 130;
+
+        if (dist < maxDist) {
+          const alpha = (1 - dist / maxDist) * 0.18;
+          ctx.beginPath();
+          ctx.moveTo(p.x, p.y);
+          ctx.lineTo(p2.x, p2.y);
+          ctx.strokeStyle = `rgba(0, 212, 255, ${alpha})`;
+          ctx.lineWidth = 0.8;
+          ctx.stroke();
+        }
       }
     }
+
+    animationFrameId = requestAnimationFrame(draw);
+  }
+
+  resize();
+  draw();
+}
+
+/* ==========================================================================
+   2. Mobile Navigation Toggle
+   ========================================================================== */
+function initMobileNav() {
+  const toggle = document.getElementById('nav-toggle');
+  const menu = document.getElementById('nav-menu');
+
+  if (!toggle || !menu) return;
+
+  toggle.addEventListener('click', () => {
+    const isOpen = menu.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', String(isOpen));
+  });
+
+  // Close menu when clicking link
+  menu.querySelectorAll('.nav-link').forEach((link) => {
+    link.addEventListener('click', () => {
+      menu.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+    });
   });
 }
 
-function drawGrid() {
-  const horizon = height * 0.58;
-  const bottom = height;
-  const center = width * 0.5;
+/* ==========================================================================
+   3. Scroll Spy for Active Navigation
+   ========================================================================== */
+function initScrollSpy() {
+  const sections = document.querySelectorAll('section[id], main section[id]');
+  const navLinks = document.querySelectorAll('.nav-link');
 
-  ctx.lineWidth = 1;
-  ctx.strokeStyle = "rgba(0, 229, 255, 0.24)";
-  for (let i = -18; i <= 18; i += 1) {
-    const x = center + i * 42;
-    ctx.beginPath();
-    ctx.moveTo(center + i * 5, horizon);
-    ctx.lineTo(x, bottom);
-    ctx.stroke();
-  }
+  if (!sections.length || !navLinks.length) return;
 
-  for (let i = 0; i < 22; i += 1) {
-    const t = i / 22;
-    const y = horizon + Math.pow(t, 2.25) * (bottom - horizon);
-    const alpha = 0.13 + t * 0.42;
-    ctx.strokeStyle = `rgba(255, 61, 242, ${alpha})`;
-    ctx.beginPath();
-    ctx.moveTo(0, y);
-    ctx.lineTo(width, y);
-    ctx.stroke();
-  }
-}
+  window.addEventListener('scroll', () => {
+    let current = '';
+    const scrollPosition = window.scrollY + 140;
 
-function drawParticles() {
-  particles.forEach((particle) => {
-    particle.y += particle.speed;
-    particle.x += Math.sin((particle.y + pulse) * 0.01) * 0.18;
+    sections.forEach((section) => {
+      const top = section.offsetTop;
+      const height = section.offsetHeight;
+      if (scrollPosition >= top && scrollPosition < top + height) {
+        current = section.getAttribute('id');
+      }
+    });
 
-    if (particle.y > height) {
-      particle.y = -12;
-      particle.x = Math.random() * width;
+    if (current) {
+      navLinks.forEach((link) => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${current}`) {
+          link.classList.add('active');
+        }
+      });
     }
-
-    ctx.fillStyle = particle.hue;
-    ctx.globalAlpha = 0.35 + Math.random() * 0.38;
-    ctx.fillRect(particle.x, particle.y, particle.size, particle.size * 8);
-    ctx.globalAlpha = 1;
   });
 }
 
-function drawGlitches() {
-  if (Math.random() > 0.92) {
-    const y = Math.random() * height * 0.72;
-    const h = 2 + Math.random() * 10;
-    const x = Math.random() * width * 0.35;
-    const w = width * (0.18 + Math.random() * 0.5);
-    ctx.fillStyle = Math.random() > 0.5 ? "rgba(0, 229, 255, 0.34)" : "rgba(255, 61, 242, 0.28)";
-    ctx.fillRect(x, y, w, h);
+/* ==========================================================================
+   4. One-Click Copy for Email
+   ========================================================================== */
+function initEmailCopy() {
+  const emailCard = document.getElementById('email-card');
+  const copyBtn = document.getElementById('copy-email-btn');
+  const emailText = document.getElementById('email-text');
+  const copyStatus = document.getElementById('copy-status');
+
+  if (!emailCard || !emailText) return;
+
+  const handleCopy = (e) => {
+    e.preventDefault();
+    const email = emailText.innerText.trim();
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(email).then(() => {
+        showCopyFeedback();
+      }).catch(() => {
+        fallbackCopy(email);
+      });
+    } else {
+      fallbackCopy(email);
+    }
+  };
+
+  function fallbackCopy(text) {
+    const tempInput = document.createElement('input');
+    tempInput.value = text;
+    document.body.appendChild(tempInput);
+    tempInput.select();
+    document.execCommand('copy');
+    document.body.removeChild(tempInput);
+    showCopyFeedback();
   }
+
+  function showCopyFeedback() {
+    if (copyStatus) {
+      const originalText = copyStatus.innerText;
+      copyStatus.innerText = '✓ ¡Copiado al portapapeles!';
+      copyStatus.style.color = '#34d399';
+      setTimeout(() => {
+        copyStatus.innerText = originalText;
+        copyStatus.style.color = '';
+      }, 3000);
+    }
+  }
+
+  emailCard.addEventListener('click', handleCopy);
+  if (copyBtn) copyBtn.addEventListener('click', handleCopy);
 }
 
-function draw() {
-  pulse += 1;
-  drawBackground();
-  drawSun();
-  drawSkyline();
-  drawGrid();
-  drawParticles();
-  drawGlitches();
-  window.requestAnimationFrame(draw);
+/* ==========================================================================
+   5. Developer Console Easter Egg
+   ========================================================================== */
+function initConsoleEasterEgg() {
+  const styles = [
+    'color: #00d4ff',
+    'background: #050811',
+    'font-size: 13px',
+    'font-weight: bold',
+    'padding: 8px 12px',
+    'border: 1px solid #00d4ff',
+    'border-radius: 4px',
+  ].join(';');
+
+  console.log(
+    '%c⚡ Luis Leonel Mejía Romero · Full Stack Developer (Angular / Node / SQL Server)',
+    styles
+  );
+  console.log(
+    'Plataforma en producción: https://sgi.unah.edu.hn | Repositorios: https://github.com/Leonel59'
+  );
 }
 
-resizeCanvas();
-draw();
-
-window.addEventListener("resize", resizeCanvas);
+/* Helper debounce */
+function debounce(func, wait) {
+  let timeout;
+  return function executedFunction(...args) {
+    const later = () => {
+      clearTimeout(timeout);
+      func(...args);
+    };
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
+}

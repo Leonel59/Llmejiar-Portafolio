@@ -1,205 +1,802 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="Portafolio personal con proyectos, habilidades y enlaces profesionales."
-    />
-    <title>Luis Leonel Romero | Cyberpunk Portfolio</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
-    <canvas id="cyber-stage" aria-hidden="true"></canvas>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Portafolio profesional de Luis Leonel Mejía Romero. Desarrollador Full Stack y co-creador del Sistema de Gestión de la Investigación (SGI) de la UNAH. Especialista en Angular, Node.js y SQL Server." />
+  <meta name="author" content="Luis Leonel Mejía Romero" />
+  <meta property="og:title" content="Luis Leonel Mejía Romero | Full Stack Developer" />
+  <meta property="og:description" content="Desarrollador Full Stack · Co-creador del SGI-UNAH en producción (1,637+ investigadores, 1,228+ proyectos) · Angular 18, Node.js, SQL Server." />
+  <meta property="og:image" content="assets/profile.jpg" />
+  <meta property="og:type" content="website" />
+  <title>Luis Leonel Mejía Romero | Full Stack Developer & Software Engineer</title>
 
-    <div class="noise" aria-hidden="true"></div>
-    <div class="scanline" aria-hidden="true"></div>
+  <!-- Google Fonts: Plus Jakarta Sans, Inter, JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800;900&display=swap" rel="stylesheet" />
 
-    <header class="site-header">
-      <a class="brand" href="#top" aria-label="Volver al inicio">
-        <span class="brand-mark">root</span>
-        <span class="brand-text">/night-city</span>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Ambient Canvas Background -->
+  <canvas id="ambient-canvas" aria-hidden="true"></canvas>
+
+  <!-- Navigation Bar -->
+  <header class="header">
+    <div class="nav-container">
+      <a href="#hero" class="brand" aria-label="Ir al inicio">
+        <div class="brand-avatar">
+          <img src="assets/profile.jpg" alt="Luis Romero" />
+        </div>
+        <div class="brand-info">
+          <span class="brand-name">Luis Romero</span>
+          <span class="brand-role">Full Stack · SGI-UNAH</span>
+        </div>
       </a>
 
-      <nav class="nav-links" aria-label="Navegacion principal">
-        <a href="#proyectos">Proyectos</a>
-        <a href="#stack">Stack</a>
-        <a href="#contacto">Contacto</a>
+      <nav class="nav-menu" id="nav-menu" aria-label="Navegación principal">
+        <a href="#hero" class="nav-link active">Inicio</a>
+        <a href="#impacto" class="nav-link">Impacto</a>
+        <a href="#proyectos" class="nav-link">Proyectos</a>
+        <a href="#stack" class="nav-link">Habilidades</a>
+        <a href="#experiencia" class="nav-link">Trayectoria</a>
+        <a href="#contacto" class="nav-link">Contacto</a>
       </nav>
-    </header>
 
-    <main id="top">
-      <section class="hero">
-        <div class="hero-copy">
-          <p class="eyebrow">Night city build / GitHub profile</p>
-          <h1>
-            Luis Leonel Romero
-            <span>Full Stack Developer</span>
+      <div class="header-actions">
+        <a href="assets/CV-Luis-Leonel-Mejia-Romero.pdf" class="btn btn-outline btn-sm" download="CV-Luis-Leonel-Mejia-Romero.pdf">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Descargar CV
+        </a>
+        <a href="https://www.linkedin.com/in/luis-leonel-romero-16a11b399/" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm" aria-label="Perfil de LinkedIn">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
+          LinkedIn
+        </a>
+        <button class="nav-toggle" id="nav-toggle" aria-label="Abrir menú" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero-section" id="hero">
+      <div class="container hero-grid">
+        <div class="hero-content">
+          <div class="status-pill">
+            <span class="status-dot"></span>
+            <span class="status-text">Disponible para Nuevos Retos & Posiciones de Impacto</span>
+          </div>
+
+          <h1 class="hero-title">
+            Luis Leonel <br />
+            <span class="gradient-text">Mejía Romero</span>
           </h1>
-          <p class="hero-text">
-            Me gusta crear sistemas web que resuelvan trabajo real: backend bien
-            estructurado, interfaces claras, automatizacion de procesos y
-            soluciones pensadas para que las personas las usen sin complicarse.
+
+          <p class="hero-subtitle">
+            <strong>Full Stack Developer & Software Engineer</strong> · Desarrollador Principal del SGI-UNAH
           </p>
 
-          <div class="hero-actions" aria-label="Enlaces principales">
-            <a class="button primary" href="https://github.com/Leonel59" target="_blank" rel="noreferrer">
-              Ver GitHub
+          <p class="hero-description">
+            Especialista en desarrollo web integral, sistemas institucionales de alto impacto y arquitecturas seguras. Líder técnico en la reingeniería y despliegue a producción de plataformas que gestionan <strong>más de 1,600 investigadores</strong>, proyectos científicos, validaciones criptográficas por QR y procesos administrativos críticos.
+          </p>
+
+          <div class="hero-tags">
+            <span class="tech-tag">Angular 18</span>
+            <span class="tech-tag">TypeScript</span>
+            <span class="tech-tag">Node.js</span>
+            <span class="tech-tag">Express</span>
+            <span class="tech-tag">SQL Server</span>
+            <span class="tech-tag">Azure & S3</span>
+            <span class="tech-tag">COMPDES 2026 🇸🇻</span>
+          </div>
+
+          <div class="hero-actions">
+            <a href="#proyectos" class="btn btn-primary btn-lg">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+              Ver Proyectos Destacados
             </a>
-            <a class="button ghost" href="https://gitlab.com/Leonel59" target="_blank" rel="noreferrer">
-              Ver GitLab
+            <a href="assets/CV-Luis-Leonel-Mejia-Romero.pdf" class="btn btn-outline btn-lg" download="CV-Luis-Leonel-Mejia-Romero.pdf">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+              Descargar CV (PDF)
             </a>
+            <a href="https://wa.me/50496314089?text=Hola%20Luis,%20vi%20tu%20portafolio%20profesional%20y%20me%20gustar%C3%ADa%20conversar%20sobre%20una%20oportunidad" target="_blank" rel="noopener noreferrer" class="btn btn-ghost btn-lg" aria-label="Contactar por WhatsApp">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.44 0-2.85-.38-4.08-1.1l-.29-.17-3.04.8 1.05-2.96-.19-.3a8.21 8.21 0 0 1-1.26-4.51c0-4.54 3.7-8.24 8.24-8.24m4.52 11.64c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.02-1.24-.75-.67-1.26-1.5-1.4-1.75-.15-.25-.02-.39.11-.51.11-.11.25-.29.38-.44.13-.15.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.13-.56-1.35-.77-1.85-.2-.49-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.13.17 1.77 2.71 4.29 3.8 2.52 1.09 2.52.73 2.98.68.45-.04 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.1-.23-.17-.48-.29z"/></svg>
+              WhatsApp
+            </a>
+          </div>
+
+          <div class="hero-social-strip">
+            <span class="social-label">Canales Directos:</span>
+            <div class="social-links">
+              <a href="https://www.linkedin.com/in/luis-leonel-romero-16a11b399/" target="_blank" rel="noopener noreferrer" title="LinkedIn" class="social-pill">
+                <span>LinkedIn</span>
+              </a>
+              <a href="https://github.com/Leonel59" target="_blank" rel="noopener noreferrer" title="GitHub" class="social-pill">
+                <span>GitHub @Leonel59</span>
+              </a>
+              <a href="https://gitlab.com/Leonel59" target="_blank" rel="noopener noreferrer" title="GitLab" class="social-pill">
+                <span>GitLab</span>
+              </a>
+              <a href="mailto:luisleonel596@gmail.com" title="Correo" class="social-pill">
+                <span>luisleonel596@gmail.com</span>
+              </a>
+            </div>
           </div>
         </div>
 
-        <div class="hero-side">
-          <figure class="profile-orbit">
-            <img src="assets/profile.jpg" alt="Foto de Luis Leonel Romero" />
-          </figure>
+        <div class="hero-visual">
+          <div class="profile-card-wrapper">
+            <!-- Glow background effect -->
+            <div class="profile-glow"></div>
 
-          <aside class="terminal" aria-label="Resumen profesional estilo terminal">
-            <div class="terminal-bar">
-              <span></span>
-              <span></span>
-              <span></span>
+            <div class="profile-card">
+              <div class="profile-image-container">
+                <img src="assets/profile.jpg" alt="Luis Leonel Mejía Romero - Desarrollador Full Stack" class="profile-image" />
+                <div class="badge-overlay verified-badge">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                  <span>Perfil Verificado</span>
+                </div>
+              </div>
+
+              <div class="profile-meta">
+                <h3 class="profile-card-name">Luis Leonel Romero</h3>
+                <p class="profile-card-title">Lic. en Informática · Full Stack Lead</p>
+                <div class="profile-location">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                  Tegucigalpa, Honduras (Remoto / Presencial)
+                </div>
+              </div>
+
+              <!-- Terminal Card with Quick Facts -->
+              <div class="interactive-terminal">
+                <div class="terminal-header">
+                  <div class="terminal-dots">
+                    <span class="dot red"></span>
+                    <span class="dot yellow"></span>
+                    <span class="dot green"></span>
+                  </div>
+                  <span class="terminal-title">luis@sgi-core:~$ status</span>
+                </div>
+                <div class="terminal-content">
+                  <div class="term-row">
+                    <span class="term-key">platform:</span>
+                    <span class="term-val highlight">SGI-UNAH (Producción Activa)</span>
+                  </div>
+                  <div class="term-row">
+                    <span class="term-key">architecture:</span>
+                    <span class="term-val">Angular 18 + Node.js + MSSQL</span>
+                  </div>
+                  <div class="term-row">
+                    <span class="term-key">conference:</span>
+                    <span class="term-val gold">COMPDES 2026 Expositor</span>
+                  </div>
+                  <div class="term-row">
+                    <span class="term-key">security:</span>
+                    <span class="term-val success">Certificados QR Criptográficos</span>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="terminal-body">
-              <div class="terminal-line">
-                <span class="prompt">$ perfil</span>
-                <p>Desarrollador full stack enfocado en sistemas web internos y soluciones administrativas.</p>
-              </div>
-              <div class="terminal-line">
-                <span class="prompt">$ lo_que_construyo</span>
-                <p class="success">APIs, paneles de gestion, reportes, flujos de solicitudes y herramientas de automatizacion.</p>
-              </div>
-              <div class="terminal-line">
-                <span class="prompt">$ forma_de_trabajo</span>
-                <p class="warning">Ordenado, practico y atento a que el software sea entendible para el usuario final.</p>
+
+            <!-- Floating Highlights -->
+            <div class="floating-badge badge-top">
+              <span class="floating-icon">🏛️</span>
+              <div class="floating-text">
+                <strong>DICIHT · UNAH</strong>
+                <small>Plataforma Institucional</small>
               </div>
             </div>
-          </aside>
+
+            <div class="floating-badge badge-bottom">
+              <span class="floating-icon">⚡</span>
+              <div class="floating-text">
+                <strong>1,637+ Investigadores</strong>
+                <small>1,228 Proyectos Activos</small>
+              </div>
+            </div>
+          </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section class="metrics" aria-label="Resumen rapido">
-        <article>
-          <strong>+3</strong>
-          <span>capas dominadas: frontend, backend y datos</span>
-        </article>
-        <article>
-          <strong>API</strong>
-          <span>servicios REST, autenticacion y flujos internos</span>
-        </article>
-        <article>
-          <strong>UX</strong>
-          <span>interfaces pensadas para trabajo diario</span>
-        </article>
-      </section>
+    <!-- Metrics / Impact Bar -->
+    <section class="impact-section" id="impacto">
+      <div class="container">
+        <div class="metrics-grid">
+          <div class="metric-card">
+            <div class="metric-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <div class="metric-body">
+              <strong class="metric-number">1,637+</strong>
+              <span class="metric-label">Investigadores Registrados</span>
+              <p class="metric-detail">En producción oficial UNAH a nivel nacional</p>
+            </div>
+          </div>
 
-      <section class="section" id="proyectos">
-        <div class="section-heading">
-          <p class="eyebrow">Selected operations</p>
-          <h2>Proyectos destacados</h2>
+          <div class="metric-card">
+            <div class="metric-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+            </div>
+            <div class="metric-body">
+              <strong class="metric-number">1,228+</strong>
+              <span class="metric-label">Proyectos Científicos</span>
+              <p class="metric-detail">Ciclo completo, trazabilidad y dictámenes</p>
+            </div>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+            </div>
+            <div class="metric-body">
+              <strong class="metric-number">113+</strong>
+              <span class="metric-label">Certificados con QR</span>
+              <p class="metric-detail">Verificación criptográfica antifalsificación</p>
+            </div>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            </div>
+            <div class="metric-body">
+              <strong class="metric-number">75%–99%</strong>
+              <span class="metric-label">Reducción de Tiempos</span>
+              <p class="metric-detail">Trámites de 30 días a minutos en plataforma</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Projects Section -->
+    <section class="section projects-section" id="proyectos">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-kicker">INGENIERÍA & PRODUCCIÓN</span>
+          <h2 class="section-title">Proyectos de Alto Impacto</h2>
+          <p class="section-subtitle">
+            Soluciones de software de misión crítica, desplegadas en producción y utilizadas diariamente por organizaciones e instituciones.
+          </p>
         </div>
 
-        <div class="project-grid">
-          <a class="project-card featured" href="https://leonel59.github.io/sgi-unah-portafolio/" target="_blank" rel="noreferrer">
-            <img class="project-media project-emblem" src="assets/sgi-logo.png" alt="Logo del SGI" />
-            <div>
-              <p class="project-kicker">Sistema institucional</p>
-              <h3>SGI / Sistema de Gestion de la Investigacion</h3>
-              <p>
-                Plataforma para gestionar investigacion institucional:
-                solicitudes, usuarios, notificaciones, catalogos, reporteria y
-                procesos administrativos.
-              </p>
-            </div>
-            <ul class="tags" aria-label="Tecnologias">
-              <li>Angular</li>
-              <li>Node.js</li>
-              <li>SQL Server</li>
-              <li>REST API</li>
-            </ul>
-          </a>
+        <div class="projects-list">
+          <!-- Featured Project 1: SGI UNAH -->
+          <article class="project-featured-card">
+            <div class="project-badge-tag">Plataforma Institucional Principal · En Producción</div>
+            <div class="project-grid-inner">
+              <div class="project-media-col">
+                <div class="project-logo-box">
+                  <img src="assets/sgi-logo.png" alt="Logo SGI UNAH" class="sgi-featured-logo" />
+                </div>
+                <div class="project-metrics-mini">
+                  <div class="mini-stat">
+                    <span>Usuarios activos</span>
+                    <strong>1,146</strong>
+                  </div>
+                  <div class="mini-stat">
+                    <span>Módulos integrados</span>
+                    <strong>9</strong>
+                  </div>
+                  <div class="mini-stat">
+                    <span>Campus y facultades</span>
+                    <strong>9 / 10</strong>
+                  </div>
+                </div>
+              </div>
 
-          <article class="project-card">
-            <img class="project-media project-emblem recarga-emblem" src="assets/recarga-veloz-white.png" alt="Logo del sistema Recarga Veloz SA" />
-            <div>
-              <p class="project-kicker">Gestion operativa</p>
-              <h3>Recarga Veloz SA</h3>
-              <p>
-                Sistema para gestion de equipos tecnologicos, reportes, manejo
-                de facturas y control de mantenimientos.
-              </p>
+              <div class="project-content-col">
+                <div class="project-header">
+                  <h3 class="project-title">SGI · Sistema de Gestión de la Investigación (UNAH)</h3>
+                  <span class="project-role-badge">Co-creador & Full Stack Lead</span>
+                </div>
+
+                <p class="project-desc">
+                  Plataforma modular tipo CRIS (Current Research Information System) de la Dirección de Investigación Científica, Humanística y Tecnológica (DICIHT-UNAH). Centraliza el censo oficial de investigadores, proyectos científicos, congresos, becas, publicaciones, catálogo digital y portal público CTI.
+                </p>
+
+                <div class="project-features">
+                  <h4>Aportes Clave y Retos Superados:</h4>
+                  <ul>
+                    <li><strong>Reingeniería completa:</strong> Unificación de formularios dispersos en una arquitectura robusta de 9 módulos conectados en tiempo real.</li>
+                    <li><strong>Arquitectura escalable:</strong> Frontend reactivo en Angular 18 (Signals, RxJS, PWA, Capacitor) conectado a API REST en Node.js y más de 80 procedimientos almacenados en SQL Server.</li>
+                    <li><strong>Seguridad y auditoría:</strong> Control de sesiones concurrentes con JWT deslizante, cifrado de mensajería, control estricto de roles (RBAC) y traza de cambios.</li>
+                    <li><strong>Impacto medible:</strong> Reducción de tiempos de registro de 30 días a 3-7 días y emisión automática de certificados en segundos.</li>
+                  </ul>
+                </div>
+
+                <div class="tech-stack-row">
+                  <span class="tech-badge">Angular 18</span>
+                  <span class="tech-badge">TypeScript</span>
+                  <span class="tech-badge">Node.js</span>
+                  <span class="tech-badge">Express</span>
+                  <span class="tech-badge">SQL Server (Stored Procedures)</span>
+                  <span class="tech-badge">Azure MSAL</span>
+                  <span class="tech-badge">S3 Storage</span>
+                  <span class="tech-badge">Firebase Push</span>
+                  <span class="tech-badge">Capacitor Mobile</span>
+                </div>
+
+                <div class="project-actions">
+                  <a href="https://leonel59.github.io/sgi-unah-portafolio/" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                    Ver Portafolio Técnico SGI
+                  </a>
+                  <a href="https://sgi.unah.edu.hn" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                    Sistema en Vivo (sgi.unah.edu.hn)
+                  </a>
+                  <a href="https://leonel59.github.io/PortalInvestigaci-nSGI/" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">
+                    Portal de Investigación CTI →
+                  </a>
+                </div>
+              </div>
             </div>
-            <ul class="tags">
-              <li>HTML</li>
-              <li>JavaScript</li>
-              <li>Angular</li>
-              <li>REST API</li>
-            </ul>
           </article>
-        </div>
-      </section>
 
-      <section class="section split" id="stack">
-        <div class="section-heading">
-          <p class="eyebrow">Tech arsenal</p>
-          <h2>Stack y enfoque</h2>
-          <p>
-            Combino desarrollo full stack con criterio de producto: que funcione,
-            que sea mantenible y que se entienda cuando alguien mas lo abra.
+          <!-- Secondary Grid of Projects -->
+          <div class="projects-subgrid">
+            <!-- Project 2: Validador Criptográfico QR -->
+            <article class="project-card">
+              <div class="project-card-header">
+                <div class="card-icon-tag">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                </div>
+                <span class="card-kicker">Seguridad & Criptografía</span>
+              </div>
+              <h3 class="card-title">Validador Institucional de Certificados QR</h3>
+              <p class="card-text">
+                Motor institucional antifalsificación para emisión y validación pública en tiempo real de constancias y certificados de investigación. Genera firmas digitales con hash criptográfico y códigos QR únicos con verificación en milisegundos.
+              </p>
+              <div class="card-highlights">
+                <span>✓ 113+ Certificados emitidos y auditados</span>
+                <span>✓ Verificación pública sin necesidad de login</span>
+                <span>✓ Generación programática de PDF con sellado digital</span>
+              </div>
+              <div class="tech-stack-row">
+                <span class="tech-badge">Node.js</span>
+                <span class="tech-badge">Crypto Hashing</span>
+                <span class="tech-badge">QR Engine</span>
+                <span class="tech-badge">SQL Server</span>
+                <span class="tech-badge">PDFKit</span>
+              </div>
+              <div class="card-actions">
+                <a href="https://sgi.unah.edu.hn" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">
+                  Ver Módulo en SGI
+                </a>
+              </div>
+            </article>
+
+            <!-- Project 3: Recarga Veloz SA -->
+            <article class="project-card">
+              <div class="project-card-header">
+                <div class="card-icon-tag">
+                  <img src="assets/recarga-veloz-white.png" alt="Recarga Veloz SA" class="recarga-mini-logo" />
+                </div>
+                <span class="card-kicker">Gestión Operativa & ERP</span>
+              </div>
+              <h3 class="card-title">Recarga Veloz S.A. · Suite de Gestión</h3>
+              <p class="card-text">
+                Sistema administrativo para gestión integral de equipos tecnológicos, control de inventario de hardware y repuestos, facturación multi-sucursal, control de mantenimientos preventivos y reportería para toma de decisiones.
+              </p>
+              <div class="card-highlights">
+                <span>✓ Control integral de ciclo de vida de activos</span>
+                <span>✓ Facturación y tickets de soporte</span>
+                <span>✓ Módulo de reportes y exportación dinámica</span>
+              </div>
+              <div class="tech-stack-row">
+                <span class="tech-badge">Angular</span>
+                <span class="tech-badge">JavaScript</span>
+                <span class="tech-badge">Node.js</span>
+                <span class="tech-badge">REST API</span>
+                <span class="tech-badge">SQL Server</span>
+              </div>
+              <div class="card-actions">
+                <a href="https://github.com/Leonel59" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">
+                  Ver en GitHub
+                </a>
+              </div>
+            </article>
+
+            <!-- Project 4: Ponencia Internacional COMPDES 2026 -->
+            <article class="project-card">
+              <div class="project-card-header">
+                <div class="card-icon-tag gold-icon">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg>
+                </div>
+                <span class="card-kicker kicker-gold">Ponencia Internacional · COMPDES 2026 🇸🇻</span>
+              </div>
+              <h3 class="card-title">Transformación Digital de la Investigación en la UNAH</h3>
+              <p class="card-text">
+                Presentación científica en la Conferencia Internacional de Computación para el Desarrollo (COMPDES 2026, El Salvador) sobre arquitectura de software tipo CRIS, enfoque de Ciencia Abierta y metodología ágil DBR/DSR.
+              </p>
+              <div class="card-highlights">
+                <span>✓ Expositor internacional en El Salvador</span>
+                <span>✓ Diapositivas interactivas en línea accesibles</span>
+                <span>✓ Enfoque en soberanía tecnológica y datos abiertos</span>
+              </div>
+              <div class="tech-stack-row">
+                <span class="tech-badge">Investigación</span>
+                <span class="tech-badge">Ciencia Abierta</span>
+                <span class="tech-badge">Arquitectura CRIS</span>
+                <span class="tech-badge">DBR / DSR</span>
+              </div>
+              <div class="card-actions">
+                <a href="https://leonel59.github.io/presentacion-compdes-2026/" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">
+                  Ver Presentación Interactiva →
+                </a>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tech Stack / Skills Section -->
+    <section class="section stack-section" id="stack">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-kicker">ARSENAL TÉCNICO</span>
+          <h2 class="section-title">Habilidades & Tecnologías</h2>
+          <p class="section-subtitle">
+            Tecnologías aplicadas y consolidadas en proyectos reales en producción, priorizando estabilidad, seguridad y mantenibilidad.
           </p>
         </div>
 
-        <div class="stack-panel">
-          <div class="stack-row">
-            <span>Frontend</span>
-            <p>Angular, TypeScript, HTML, CSS, responsive UI</p>
+        <div class="stack-grid">
+          <!-- Frontend -->
+          <div class="stack-category-card">
+            <div class="category-header">
+              <div class="category-icon cyan">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+              </div>
+              <div>
+                <h3 class="category-title">Frontend Moderno</h3>
+                <span class="category-desc">Interfaces reactivas, accesibles y de alto rendimiento</span>
+              </div>
+            </div>
+            <ul class="skills-list">
+              <li>
+                <div class="skill-name">
+                  <strong>Angular 18 & TypeScript</strong>
+                  <span class="skill-level">Avanzado</span>
+                </div>
+                <p class="skill-details">Signals, RxJS, Componentes modulares, Routing avanzado, Formularios reactivos complejos.</p>
+              </li>
+              <li>
+                <div class="skill-name">
+                  <strong>Angular Material & PrimeNG</strong>
+                  <span class="skill-level">Avanzado</span>
+                </div>
+                <p class="skill-details">Tablas institucionales densas, filtrado multinivel, paginación y modales dinámicos.</p>
+              </li>
+              <li>
+                <div class="skill-name">
+                  <strong>PWA, SSR & Capacitor</strong>
+                  <span class="skill-level">Intermedio/Avanzado</span>
+                </div>
+                <p class="skill-details">Compilación multiplataforma para Android/iOS, sincronización y capacidades offline.</p>
+              </li>
+              <li>
+                <div class="skill-name">
+                  <strong>HTML5 Semántico, CSS3 & Responsive UI</strong>
+                  <span class="skill-level">Avanzado</span>
+                </div>
+                <p class="skill-details">Flexbox, CSS Grid, variables de diseño, Chart.js, animaciones fluidas y accesibilidad WCAG.</p>
+              </li>
+            </ul>
           </div>
-          <div class="stack-row">
-            <span>Backend</span>
-            <p>Node.js, Express, servicios REST, autenticacion</p>
+
+          <!-- Backend -->
+          <div class="stack-category-card">
+            <div class="category-header">
+              <div class="category-icon green">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
+              </div>
+              <div>
+                <h3 class="category-title">Backend & Servicios REST</h3>
+                <span class="category-desc">Lógica de negocio, APIs robustas y control de acceso</span>
+              </div>
+            </div>
+            <ul class="skills-list">
+              <li>
+                <div class="skill-name">
+                  <strong>Node.js & Express</strong>
+                  <span class="skill-level">Avanzado</span>
+                </div>
+                <p class="skill-details">Arquitectura en capas (controladores, servicios, modelos, middleware), REST APIs.</p>
+              </li>
+              <li>
+                <div class="skill-name">
+                  <strong>Autenticación & Sesiones Seguras</strong>
+                  <span class="skill-level">Avanzado</span>
+                </div>
+                <p class="skill-details">JWT con ventana deslizante, bcrypt, control de sesiones concurrentes y roles RBAC.</p>
+              </li>
+              <li>
+                <div class="skill-name">
+                  <strong>Notificaciones & Integraciones</strong>
+                  <span class="skill-level">Intermedio/Avanzado</span>
+                </div>
+                <p class="skill-details">Firebase Admin (Web Push), Nodemailer para correos transaccionales y Multer para archivos.</p>
+              </li>
+              <li>
+                <div class="skill-name">
+                  <strong>Python & Motores Auxiliares</strong>
+                  <span class="skill-level">Intermedio</span>
+                </div>
+                <p class="skill-details">Scripts de similitud de textos, procesamiento de corpus de investigación y análisis de datos.</p>
+              </li>
+            </ul>
           </div>
-          <div class="stack-row">
-            <span>Datos</span>
-            <p>SQL Server, procedimientos almacenados, modelado de procesos</p>
+
+          <!-- Bases de Datos -->
+          <div class="stack-category-card">
+            <div class="category-header">
+              <div class="category-icon purple">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+              </div>
+              <div>
+                <h3 class="category-title">Bases de Datos & Persistencia</h3>
+                <span class="category-desc">Modelado relacional y alto volumen de transacciones</span>
+              </div>
+            </div>
+            <ul class="skills-list">
+              <li>
+                <div class="skill-name">
+                  <strong>Microsoft SQL Server & T-SQL</strong>
+                  <span class="skill-level">Avanzado</span>
+                </div>
+                <p class="skill-details">Procedimientos almacenados críticos (.sql), consultas parametrizadas, índices y vistas.</p>
+              </li>
+              <li>
+                <div class="skill-name">
+                  <strong>Modelado Relacional & Normalización</strong>
+                  <span class="skill-level">Avanzado</span>
+                </div>
+                <p class="skill-details">Diseño de entidades para gobernanza de datos universitarios, trazabilidad e histórico de auditoría.</p>
+              </li>
+              <li>
+                <div class="skill-name">
+                  <strong>Reportes & Exportación Dinámica</strong>
+                  <span class="skill-level">Avanzado</span>
+                </div>
+                <p class="skill-details">Generación de archivos XLSX con estilos, reportes ejecutivos en PDF (jsPDF / pdf-lib).</p>
+              </li>
+              <li>
+                <div class="skill-name">
+                  <strong>MySQL & Compatibilidad SQL</strong>
+                  <span class="skill-level">Intermedio/Avanzado</span>
+                </div>
+                <p class="skill-details">Gestión de migraciones, respaldo de datos y consultas analíticas agregadas.</p>
+              </li>
+            </ul>
           </div>
-          <div class="stack-row">
-            <span>Modo</span>
-            <p>Depuracion, documentacion, automatizacion y entrega iterativa</p>
+
+          <!-- Cloud, DevOps & Seguridad -->
+          <div class="stack-category-card">
+            <div class="category-header">
+              <div class="category-icon gold">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              </div>
+              <div>
+                <h3 class="category-title">Cloud, Seguridad & QA</h3>
+                <span class="category-desc">Garantía de calidad, despliegue y protección de datos</span>
+              </div>
+            </div>
+            <ul class="skills-list">
+              <li>
+                <div class="skill-name">
+                  <strong>Git, GitLab CI/CD & GitHub</strong>
+                  <span class="skill-level">Avanzado</span>
+                </div>
+                <p class="skill-details">Flujo con ramas dev, test y prod, versionado semántico, pull requests y control de cambios.</p>
+              </li>
+              <li>
+                <div class="skill-name">
+                  <strong>Cloud & Almacenamiento Seguro</strong>
+                  <span class="skill-level">Intermedio</span>
+                </div>
+                <p class="skill-details">Azure (MSAL para autenticación institucional), AWS S3 para resguardo de documentos.</p>
+              </li>
+              <li>
+                <div class="skill-name">
+                  <strong>Auditoría & Seguridad Web (OWASP)</strong>
+                  <span class="skill-level">Avanzado</span>
+                </div>
+                <p class="skill-details">Prevención de SQL Injection, control de rate limit, sanitización de inputs y ofuscación de trazas.</p>
+              </li>
+              <li>
+                <div class="skill-name">
+                  <strong>QA, Pruebas & Documentación</strong>
+                  <span class="skill-level">Avanzado</span>
+                </div>
+                <p class="skill-details">Jasmine/Karma, Jest, manuales técnicos de arquitectura y manuales de usuario final.</p>
+              </li>
+            </ul>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section class="section contact" id="contacto">
-        <p class="eyebrow">Open channel</p>
-        <h2>Hablemos de tecnologia y proyectos</h2>
-        <p>
-          Si buscas un desarrollador full stack para construir, mejorar o
-          mantener sistemas web, puedes contactarme por correo o revisar mi
-          trabajo en GitHub y GitLab.
-        </p>
-        <div class="contact-links">
-          <a href="mailto:luisleonel596@gmail.com">luisleonel596@gmail.com</a>
-          <a href="https://github.com/Leonel59" target="_blank" rel="noreferrer">github.com/Leonel59</a>
-          <a href="https://gitlab.com/Leonel59" target="_blank" rel="noreferrer">gitlab.com/Leonel59</a>
+    <!-- Professional Trajectory Section -->
+    <section class="section trajectory-section" id="experiencia">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-kicker">EXPERIENCIA & FORMACIÓN</span>
+          <h2 class="section-title">Trayectoria Profesional</h2>
+          <p class="section-subtitle">
+            Recorrido profesional combinando ingeniería de software, liderazgo técnico e impacto institucional.
+          </p>
         </div>
-      </section>
-    </main>
 
-    <footer class="site-footer">
-      <span>crafted in neon mode</span>
-      <span>2026 Luis Leonel Romero</span>
-    </footer>
+        <div class="timeline">
+          <!-- Item 1 -->
+          <div class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content">
+              <div class="timeline-header">
+                <span class="timeline-period">2025 — Presente</span>
+                <span class="timeline-badge primary">En Curso · Tiempo Completo</span>
+              </div>
+              <h3 class="timeline-title">Desarrollador Full Stack Principal · SGI-UNAH</h3>
+              <h4 class="timeline-org">Dirección de Investigación Científica, Humanística y Tecnológica (DICIHT — UNAH)</h4>
+              <p class="timeline-text">
+                Liderazgo en el ciclo completo de vida del software: reingeniería técnica, desarrollo full stack, auditoría de seguridad, despliegue a producción en <code>sgi.unah.edu.hn</code>, y capacitación en 10 facultades y 9 campus universitarios a nivel nacional.
+              </p>
+              <div class="timeline-achievements">
+                <span>✓ Implementación de 9 módulos críticos CRIS</span>
+                <span>✓ Adopción de 1,637+ investigadores y 1,228+ proyectos</span>
+                <span>✓ Módulo de validación de certificados QR antifalsificación</span>
+              </div>
+            </div>
+          </div>
 
-    <script src="script.js"></script>
-  </body>
+          <!-- Item 2 -->
+          <div class="timeline-item">
+            <div class="timeline-marker gold"></div>
+            <div class="timeline-content">
+              <div class="timeline-header">
+                <span class="timeline-period">2026</span>
+                <span class="timeline-badge gold">Conferencia Internacional</span>
+              </div>
+              <h3 class="timeline-title">Ponente Internacional · COMPDES 2026</h3>
+              <h4 class="timeline-org">Conferencia Internacional de Computación para el Desarrollo (El Salvador)</h4>
+              <p class="timeline-text">
+                Expositor de la investigación y desarrollo: <em>“Sistema de Gestión de la Investigación de la UNAH: transformación digital con enfoque de Ciencia Abierta”</em>, presentando la metodología ágil DBR/DSR y los resultados de impacto institucional a la comunidad científica internacional.
+              </p>
+            </div>
+          </div>
+
+          <!-- Item 3 -->
+          <div class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content">
+              <div class="timeline-header">
+                <span class="timeline-period">Graduado Universitario</span>
+                <span class="timeline-badge success">Título Oficial</span>
+              </div>
+              <h3 class="timeline-title">Licenciatura en Informática Administrativa</h3>
+              <h4 class="timeline-org">Universidad Nacional Autónoma de Honduras (UNAH)</h4>
+              <p class="timeline-text">
+                Formación integral en análisis y diseño de sistemas, ingeniería de software, arquitectura de bases de datos relacionales, auditoría de sistemas de información y formulación de proyectos tecnológicos.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact & Connect Section -->
+    <section class="section contact-section" id="contacto">
+      <div class="container">
+        <div class="contact-box">
+          <div class="contact-header">
+            <span class="section-kicker">CANALES DIRECTOS</span>
+            <h2 class="contact-title">¿Listo para construir software de impacto?</h2>
+            <p class="contact-subtitle">
+              Estoy disponible para incorporarme a equipos tecnológicos de alto rendimiento, proyectos de consultoría o posiciones como Full Stack Developer.
+            </p>
+          </div>
+
+          <div class="contact-cards-grid">
+            <!-- WhatsApp -->
+            <a href="https://wa.me/50496314089?text=Hola%20Luis,%20estoy%20interesado%20en%20tu%20perfil%20como%20desarrollador" target="_blank" rel="noopener noreferrer" class="contact-card whatsapp">
+              <div class="card-icon">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.44 0-2.85-.38-4.08-1.1l-.29-.17-3.04.8 1.05-2.96-.19-.3a8.21 8.21 0 0 1-1.26-4.51c0-4.54 3.7-8.24 8.24-8.24m4.52 11.64c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.02-1.24-.75-.67-1.26-1.5-1.4-1.75-.15-.25-.02-.39.11-.51.11-.11.25-.29.38-.44.13-.15.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.13-.56-1.35-.77-1.85-.2-.49-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.13.17 1.77 2.71 4.29 3.8 2.52 1.09 2.52.73 2.98.68.45-.04 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.1-.23-.17-.48-.29z"/></svg>
+              </div>
+              <div class="card-info">
+                <span class="card-type">WhatsApp / Móvil</span>
+                <strong class="card-detail">+504 9631-4089</strong>
+                <span class="card-subtext">Respuesta rápida · Clic para chatear</span>
+              </div>
+              <span class="card-arrow">→</span>
+            </a>
+
+            <!-- Correo con Copiado Rápido -->
+            <div class="contact-card email-card" id="email-card">
+              <div class="card-icon">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              </div>
+              <div class="card-info">
+                <span class="card-type">Correo Electrónico</span>
+                <strong class="card-detail" id="email-text">luisleonel596@gmail.com</strong>
+                <span class="card-subtext" id="copy-status">Clic para copiar dirección</span>
+              </div>
+              <button class="copy-btn" id="copy-email-btn" title="Copiar correo">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              </button>
+            </div>
+
+            <!-- LinkedIn -->
+            <a href="https://www.linkedin.com/in/luis-leonel-romero-16a11b399/" target="_blank" rel="noopener noreferrer" class="contact-card linkedin">
+              <div class="card-icon">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
+              </div>
+              <div class="card-info">
+                <span class="card-type">Red Profesional</span>
+                <strong class="card-detail">Luis Leonel Mejía Romero</strong>
+                <span class="card-subtext">linkedin.com/in/luis-leonel-romero</span>
+              </div>
+              <span class="card-arrow">→</span>
+            </a>
+
+            <!-- GitHub -->
+            <a href="https://github.com/Leonel59" target="_blank" rel="noopener noreferrer" class="contact-card github">
+              <div class="card-icon">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg>
+              </div>
+              <div class="card-info">
+                <span class="card-type">Código & Repositorios</span>
+                <strong class="card-detail">github.com/Leonel59</strong>
+                <span class="card-subtext">Ver proyectos y contribuciones</span>
+              </div>
+              <span class="card-arrow">→</span>
+            </a>
+          </div>
+
+          <!-- CV Download Strip -->
+          <div class="cv-download-banner">
+            <div class="cv-banner-info">
+              <h4>¿Requieres mi currículum en formato oficial?</h4>
+              <p>Descarga la versión completa en PDF (3 páginas, detalles institucionales, métricas y referencias).</p>
+            </div>
+            <a href="assets/CV-Luis-Leonel-Mejia-Romero.pdf" class="btn btn-primary btn-lg" download="CV-Luis-Leonel-Mejia-Romero.pdf">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Descargar Currículum (PDF)
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <div class="footer-left">
+        <span class="footer-title">Luis Leonel Mejía Romero</span>
+        <p class="footer-sub">Full Stack Developer · Desarrollador Principal del SGI-UNAH · Lic. en Informática</p>
+      </div>
+      <div class="footer-right">
+        <span>© 2026 Luis Leonel Mejía Romero · Tegucigalpa, Honduras</span>
+        <div class="footer-links">
+          <a href="#hero">Inicio</a>
+          <a href="#proyectos">Proyectos</a>
+          <a href="#contacto">Contacto</a>
+          <a href="https://github.com/Leonel59" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a href="https://www.linkedin.com/in/luis-leonel-romero-16a11b399/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
 </html>
